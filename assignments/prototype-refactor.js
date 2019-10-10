@@ -24,7 +24,7 @@ Prototype Refactor
 //   };
 //   }
   
-Class GameObject{
+class GameObject{
     constructor(createdAt, name, dimensions){
     this.createdAt = createdAt;
     this.name = name;
@@ -37,27 +37,37 @@ Class GameObject{
   // GameObject.prototype.destroy = function(){
   //   return `${this.name} was removed from the game`;
   // };
-  /*
+/*
     === CharacterStats ===
     * healthPoints
     * takeDamage() // prototype method -> returns the string '<object name> took damage.'
     * should inherit destroy() from GameObject's prototype
   */
-  
-  function CharacterStats(stats){
-    this.healthPoints = stats.healthPoints;
-    GameObject.call(this,stats);
-    this.areStats = stats.areStats;
-    this.takeDamage = function(){
-      return `${this.name} took damage`;
-    };
-  };
-  
+
+// function CharacterStats(stats){
+//     this.healthPoints = stats.healthPoints;
+//     GameObject.call(this,stats);
+//     this.areStats = stats.areStats;
+//     this.takeDamage = function(){
+//       return `${this.name} took damage`;
+//     };
+//   };
+
+class CharacterSets extends GameObject{
+    constructor(goAttrs, healthPoints, areStats){
+        super(goAttrs);
+        this.healthPoints = healthPoints;
+        this.areStats = areStats;
+    }
+    takeDamage(){
+        return `${this.name} took damage`;
+    }
+}
   // CharacterStats.prototype.takeDamage = function(){
   //   return `${this.name} took damage`;
   // };
   
-  CharacterStats.prototype = Object.create(GameObject.prototype);
+//   CharacterStats.prototype = Object.create(GameObject.prototype);
   /*
     === Humanoid (Having an appearance or character resembling that of a human.) ===
     * team
@@ -67,46 +77,85 @@ Class GameObject{
     * should inherit destroy() from GameObject through CharacterStats
     * should inherit takeDamage() from CharacterStats
   */
-  function Humanoid(human){
-    this.team = human.team;
-    this.weapons = human.weapons;
-    this.language = human.language;
-    GameObject.call(this,human);
-    CharacterStats.call(this,human);
-    this.greet = function(){
-      return `${this.name} offers a greeting in ${this.language}`;
-  }}
+//   function Humanoid(human){
+//     this.team = human.team;
+//     this.weapons = human.weapons;
+//     this.language = human.language;
+//     GameObject.call(this,human);
+//     CharacterStats.call(this,human);
+//     this.greet = function(){
+//       return `${this.name} offers a greeting in ${this.language}`;
+//   }}
   // Humanoid.prototype.greet = function(){
   //   return `${this.name} offers a greeting in ${this.language}`;
   // }
   
-  Humanoid.prototype = Object.create(CharacterStats.prototype);
-  
+//   Humanoid.prototype = Object.create(CharacterStats.prototype);
+class Humanoid extends CharacterSets{
+    constructor(csAtts, human){
+        super(csAtts);
+        this.human = human;
+    }
+    greet(){
+        return `${this.name} offers a greeting in ${this.language}`;
+    }
+}
   /*
     * Inheritance chain: GameObject -> CharacterStats -> Humanoid
     * Instances of Humanoid should have all of the same properties as CharacterStats and GameObject.
     * Instances of CharacterStats should have all of the same properties as GameObject.
   */
   
-  function Villain(villain){
-    Humanoid.call(this,villain);
-    this.attack = function(character){
-      character.healthPoints -=5;
+//   function Villain(villain){
+//     Humanoid.call(this,villain);
+//     this.attack = function(character){
+//       character.healthPoints -=5;
+//       // console.log(character.healthPoints);
+//       if(character.healthPoints == 0){
+//         character.destroy();
+//       }
+//   }
+//   }
+
+//   Villain.prototype = Object.create(Humanoid.prototype);
+
+class Villain extends Humanoid{
+    constructor(humanAttrs, villain){
+        super(humanAttrs);
+        this.villain = villain;
+    }
+    attack(character){
+        character.healthPoints -=5;
       // console.log(character.healthPoints);
-      if(character.healthPoints == 0){
+    if(character.healthPoints == 0){
         character.destroy();
-      }
-  }
-  }
+    }
+    }
+}
+
+class Hero extends Humanoid{
+    constructor(humanAttributes, hero){
+        super(humanAttributes);
+        this.hero = hero;
+    }
+    heroAttack(diffCharacter){
+        diffCharacter.healthPoints -=6;
+      // console.log(character.healthPoints);
+    if(diffCharacter.healthPoints == 0){
+        diffCharacter.destroy();
+    }
+    }
+}
+
+//   function Hero(hero){
+//     Villain.call(this,hero);
+//   }
   
-  Villain.prototype = Object.create(Humanoid.prototype);
+//   Hero.prototype = Object.create(Humanoid.prototype);
   
-  function Hero(hero){
-    Villain.call(this,hero);
-  }
-  
-  Hero.prototype = Object.create(Humanoid.prototype);
-  
+// class Hero extends Villain{
+//     constructor(createdAt, name, dimensions,healthPoints, areStats, human, villain)
+// }
   // Test you work by un-commenting these 3 objects and the list of console logs below:
   
   
@@ -192,9 +241,13 @@ Class GameObject{
       ],
       language: 'Common Tongue',
     });
-  
+
+    console.log(mage);
+    console.log(swordsman);
+    console.log(archer);
+    console.log(newVillain);
     console.log(mage.createdAt); // Today's date
-    console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
+    console.log(archer.createdAt.dimensions); // { length: 1, width: 2, height: 4 }
     console.log(swordsman.healthPoints); // 15
     console.log(mage.name); // Bruce
     console.log(swordsman.team); // The Round Table
@@ -204,14 +257,14 @@ Class GameObject{
     console.log(mage.takeDamage()); // Bruce took damage.
     console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
     console.log(newVillain.attack(mage));
-    newVillain.attack(newHero);
-    newHero.attack(newVillain);
-    newVillain.attack(newHero);
-    newHero.attack(newVillain);
-    newVillain.attack(newHero);
-    newHero.attack(newVillain);
-    newVillain.attack(newHero);
-    newHero.attack(newVillain);
+    // newVillain.attack(newHero);
+    // newHero.attack(newVillain);
+    // newVillain.attack(newHero);
+    // newHero.attack(newVillain);
+    // newVillain.attack(newHero);
+    // newHero.attack(newVillain);
+    // newVillain.attack(newHero);
+    // newHero.attack(newVillain);
   
   
   
