@@ -6,10 +6,10 @@ This challenge focuses on classes in JavaScript using the new `class` keyword.
 
 **Follow these steps to set up and work on your project:**
 
-* [ ] Create a forked copy of this project.
+<!-- * [ ] Create a forked copy of this project.
 * [ ] Add your project manager as collaborator on Github.
 * [ ] Clone your OWN version of the repository (Not Lambda's by mistake!).
-* [ ] Create a new branch: git checkout -b `<firstName-lastName>`.
+* [ ] Create a new branch: git checkout -b `<firstName-lastName>`. -->
 * [ ] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly.
 * [ ] Push commits: git push origin `<firstName-lastName>`.
 
@@ -44,8 +44,14 @@ const fred = new Person({
 
 ## `prototype-refactor` - Take existing code and make it modern.
 
-* You're going to work with your prototypes assignment you built out yesterday.
-* `Challenge:` **Convert** all of your constructors into ES6 Classes using the `class` and `extends` keywords. You should be able to run your same logs and they should build out the proper expected behaviors.
+<!-- * You're going to work with your prototypes assignment you built out yesterday.
+* `Challenge:` **Convert** all of your constructors into ES6 Classes using the `class` and `extends` keywords. You should be able to run your same logs and they should build out the proper expected behaviors. -->
+
+
+
+
+
+
 
 ## `lambda-classes` - We need a roster of Lambda School personnel. Build it!
 
@@ -69,14 +75,14 @@ const fred = new Instructor({
 
 #### Person
 
-* First we need a Person class. This will be our `base-class`
+<!-- * First we need a Person class. This will be our `base-class`
 * Person receives `name` `age` `location` all as props
 * Person receives `speak` as a method.
-* This method logs out a phrase `Hello my name is Fred, I am from Bedrock` where `name` and `location` are the object's own props
+* This method logs out a phrase `Hello my name is Fred, I am from Bedrock` where `name` and `location` are the object's own props -->
 
 #### Instructor
 
-* Now that we have a Person as our base class, we'll build our Instructor class.
+<!-- * Now that we have a Person as our base class, we'll build our Instructor class.
 * Instructor uses the same attributes that have been set up by Person
 * Instructor has the following unique props:
   * `specialty` what the Instructor is good at i.e. 'redux'
@@ -84,31 +90,31 @@ const fred = new Instructor({
   * `catchPhrase` i.e. `Don't forget the homies`
 * Instructor has the following methods:
   * `demo` receives a `subject` string as an argument and logs out the phrase 'Today we are learning about {subject}' where subject is the param passed in.
-  * `grade` receives a `student` object and a `subject` string as arguments and logs out '{student.name} receives a perfect score on {subject}'
+  * `grade` receives a `student` object and a `subject` string as arguments and logs out '{student.name} receives a perfect score on {subject}' -->
 
 #### Student
 
-* Now we need some students!
+<!-- * Now we need some students!
 * Student uses the same attributes that have been set up by Person
 * Student has the following unique props:
   * `previousBackground` i.e. what the Student used to do before Lambda School
   * `className` i.e. CS132
-  * `favSubjects`. i.e. an array of the student's favorite subjects ['Html', 'CSS', 'JavaScript']
-* Student has the following methods:
-  * `listsSubjects` a method that logs out all of the student's favoriteSubjects one by one.
-  * `PRAssignment` a method that receives a subject as an argument and logs out that the `student.name has submitted a PR for {subject}`
-  * `sprintChallenge` similar to PRAssignment but logs out `student.name has begun sprint challenge on {subject}`
+  * `favSubjects`. i.e. an array of the student's favorite subjects ['Html', 'CSS', 'JavaScript'] -->
+<!-- * Student has the following methods:
+  * `listsSubjects` a method that logs out all of the student's favoriteSubjects one by one. -->
+  <!-- * `PRAssignment` a method that receives a subject as an argument and logs out that the `student.name has submitted a PR for {subject}`
+  * `sprintChallenge` similar to PRAssignment but logs out `student.name has begun sprint challenge on {subject}` -->
 
 #### Project Manager
 
-* Now that we have instructors and students, we'd be nowhere without our PM's
-* ProjectManagers are extensions of Instructors
+<!-- * Now that we have instructors and students, we'd be nowhere without our PM's -->
+<!-- * ProjectManagers are extensions of Instructors
 * ProjectManagers have the following unique props:
   * `gradClassName`: i.e. CS1
   * `favInstructor`: i.e. Sean
 * ProjectManagers have the following Methods:
   * `standUp` a method that takes in a slack channel and logs `{name} announces to {channel}, @channel standy times!​​​​​
-  * `debugsCode` a method that takes in a student object and a subject and logs out `{name} debugs {student.name}'s code on {subject}`
+  * `debugsCode` a method that takes in a student object and a subject and logs out `{name} debugs {student.name}'s code on {subject}` -->
 
 #### Stretch Problem
 
