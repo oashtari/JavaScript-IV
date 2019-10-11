@@ -31,7 +31,7 @@ class GameObject{
     this.dimensions = attrs.dimensions;
     }
     destroy(){
-        return(`${this.name} was removed from the game`);
+        console.log(`${this.name} was removed from the game`);
     };
 }
   // GameObject.prototype.destroy = function(){
@@ -110,12 +110,12 @@ class Humanoid extends CharacterSets{
   
 //   function Villain(villain){
 //     Humanoid.call(this,villain);
-//     this.attack = function(character){
-//       character.healthPoints -=5;
-//       // console.log(character.healthPoints);
-//       if(character.healthPoints == 0){
-//         character.destroy();
-//       }
+    // this.attack = function(character){
+    //   character.healthPoints -=5;
+    //   // console.log(character.healthPoints);
+    //   if(character.healthPoints == 0){
+    //     character.destroy();
+    //   }
 //   }
 //   }
 
@@ -126,12 +126,11 @@ class Villain extends Humanoid{
         super(humanAttrs);
     }
     attack(character){
-        character.healthPoints -=5;
-      console.log(character.healthPoints);
+      character.healthPoints -=5;
+      console.log(`${character.name} has been attacked and has ${character.healthPoints} health points left`);
     if(character.healthPoints <= 0){
         character.destroy();
     }
-    return `${character.name} has been attacked!`
     }
 }
 
@@ -140,12 +139,11 @@ class Hero extends Humanoid{
         super(humanAttributes);
     }
     heroAttack(diffCharacter){
-        diffCharacter.healthPoints -=6;
-      console.log(diffCharacter.healthPoints);
-    if(diffCharacter.healthPoints <= 0){
+      diffCharacter.healthPoints -=6;
+      console.log(`${diffCharacter.name} said ouchy and has ${diffCharacter.healthPoints} health points left`);
+      if(diffCharacter.healthPoints <= 0){
         diffCharacter.destroy();
-    }
-    return `${diffCharacter.name} said ouchy!`
+      }
     }
 }
 
@@ -254,7 +252,7 @@ class Hero extends Humanoid{
     console.log(archer.greet()); // Lilith offers a greeting in Elvish.
     console.log(mage.takeDamage()); // Bruce took damage.
     console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
-    console.log(newVillain.attack(mage));
+    newVillain.attack(mage);
     newVillain.attack(newHero);
     newHero.heroAttack(newVillain);
     newVillain.attack(newHero);
