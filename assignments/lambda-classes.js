@@ -7,8 +7,9 @@ class Person{
         this.name = name;
         this.age = age;
         this.location = location;
+    }
         speak(){
             console.log(`Hello my name is ${this.name}, I am from ${this.location}`);
         }
     }
-}
+console.log(Person);

@@ -25,13 +25,13 @@ Prototype Refactor
 //   }
   
 class GameObject{
-    constructor(createdAt, name, dimensions){
-    this.createdAt = createdAt;
-    this.name = name;
-    this.dimensions = dimensions;
+    constructor(attrs){
+    this.createdAt = attrs.createdAt;
+    this.name = attrs.name;
+    this.dimensions = attrs.dimensions;
     }
     destroy(){
-        console.log(`${this.name} was removed from the game`);
+        return(`${this.name} was removed from the game`);
     };
 }
   // GameObject.prototype.destroy = function(){
@@ -54,10 +54,10 @@ class GameObject{
 //   };
 
 class CharacterSets extends GameObject{
-    constructor(goAttrs, healthPoints, areStats){
+    constructor(goAttrs){
         super(goAttrs);
-        this.healthPoints = healthPoints;
-        this.areStats = areStats;
+        this.healthPoints = goAttrs.healthPoints;
+        this.areStats = goAttrs.areStats;
     }
     takeDamage(){
         return `${this.name} took damage`;
@@ -92,9 +92,11 @@ class CharacterSets extends GameObject{
   
 //   Humanoid.prototype = Object.create(CharacterStats.prototype);
 class Humanoid extends CharacterSets{
-    constructor(csAtts, human){
-        super(csAtts);
-        this.human = human;
+    constructor(csAttrs){
+        super(csAttrs);
+        this.team = csAttrs.team;
+        this.weapons = csAttrs.weapons;
+        this.language = csAttrs.language;
     }
     greet(){
         return `${this.name} offers a greeting in ${this.language}`;
@@ -120,30 +122,30 @@ class Humanoid extends CharacterSets{
 //   Villain.prototype = Object.create(Humanoid.prototype);
 
 class Villain extends Humanoid{
-    constructor(humanAttrs, villain){
+    constructor(humanAttrs){
         super(humanAttrs);
-        this.villain = villain;
     }
     attack(character){
         character.healthPoints -=5;
-      // console.log(character.healthPoints);
-    if(character.healthPoints == 0){
+      console.log(character.healthPoints);
+    if(character.healthPoints <= 0){
         character.destroy();
     }
+    return `${character.name} has been attacked!`
     }
 }
 
 class Hero extends Humanoid{
-    constructor(humanAttributes, hero){
+    constructor(humanAttributes){
         super(humanAttributes);
-        this.hero = hero;
     }
     heroAttack(diffCharacter){
         diffCharacter.healthPoints -=6;
-      // console.log(character.healthPoints);
-    if(diffCharacter.healthPoints == 0){
+      console.log(diffCharacter.healthPoints);
+    if(diffCharacter.healthPoints <= 0){
         diffCharacter.destroy();
     }
+    return `${diffCharacter.name} said ouchy!`
     }
 }
 
@@ -242,12 +244,8 @@ class Hero extends Humanoid{
       language: 'Common Tongue',
     });
 
-    console.log(mage);
-    console.log(swordsman);
-    console.log(archer);
-    console.log(newVillain);
     console.log(mage.createdAt); // Today's date
-    console.log(archer.createdAt.dimensions); // { length: 1, width: 2, height: 4 }
+    console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
     console.log(swordsman.healthPoints); // 15
     console.log(mage.name); // Bruce
     console.log(swordsman.team); // The Round Table
@@ -257,14 +255,14 @@ class Hero extends Humanoid{
     console.log(mage.takeDamage()); // Bruce took damage.
     console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
     console.log(newVillain.attack(mage));
-    // newVillain.attack(newHero);
-    // newHero.attack(newVillain);
-    // newVillain.attack(newHero);
-    // newHero.attack(newVillain);
-    // newVillain.attack(newHero);
-    // newHero.attack(newVillain);
-    // newVillain.attack(newHero);
-    // newHero.attack(newVillain);
+    newVillain.attack(newHero);
+    newHero.heroAttack(newVillain);
+    newVillain.attack(newHero);
+    newHero.heroAttack(newVillain);
+    newVillain.attack(newHero);
+    newHero.heroAttack(newVillain);
+    newVillain.attack(newHero);
+    newHero.heroAttack(newVillain);
   
   
   
